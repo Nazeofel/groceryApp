@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { invoke } from '@tauri-apps/api'
+import { invoke } from './@tauri-apps/api'
 import './App.scss'
 //import axios from 'axios';
 
