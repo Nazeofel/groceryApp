@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import tauriapi from '@tauri-apps/api';
+import { invoke } from '@tauri-apps/api'
 import './App.scss'
 
-const { invoke } = tauriapi.tauri;
 //import axios from 'axios';
 
 function Card({addItem, data, id, title, deleteItem, deleteCard}) {
