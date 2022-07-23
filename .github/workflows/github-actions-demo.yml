@@ -3,7 +3,6 @@ name: Release
 on:
   workflow_dispatch:
 
-
 jobs:
   release:
     strategy:
@@ -33,6 +32,7 @@ jobs:
       - name: Install app dependencies and build web
         run: yarn && yarn build
         working-directory: ./test/
+        
       - name: Build the app
         uses: tauri-apps/tauri-action@v0
 
