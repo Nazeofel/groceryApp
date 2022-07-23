@@ -1,12 +1,16 @@
 name: Release
 
-projectPath: "./test/"
-
 on:
   push:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      projectPath:
+        type: string
+        options: 
+        - ./test/
+
 
 jobs:
   release:
@@ -16,6 +20,8 @@ jobs:
         platform: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
+      - name: projectPath
+    
       - name: Checkout repository
         uses: actions/checkout@v2
 
