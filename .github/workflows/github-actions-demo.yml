@@ -8,8 +8,6 @@ on:
     inputs:
       projectPath:
         type: string
-        options: 
-        - ./test/
 
 
 jobs:
@@ -20,8 +18,6 @@ jobs:
         platform: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
-      - name: projectPath
-    
       - name: Checkout repository
         uses: actions/checkout@v2
 
