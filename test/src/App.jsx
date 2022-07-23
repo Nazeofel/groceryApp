@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import tauriapi from '@tauri-apps/api';
+import tauriapi from './@tauri-apps/api';
 import './App.scss'
 
 const { invoke } = tauriapi.tauri;
