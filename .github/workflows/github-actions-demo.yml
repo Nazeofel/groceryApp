@@ -1,4 +1,7 @@
 name: Release
+
+projectPath: "./test/"
+
 on:
   push:
     tags:
