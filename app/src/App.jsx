@@ -5,6 +5,7 @@ import './App.scss'
 //import axios from 'axios';
 
 function Card({addItem, data, id, title, deleteItem, deleteCard}) {
+
   const [show, setShown] = useState(false);
 
   return (
@@ -16,7 +17,7 @@ function Card({addItem, data, id, title, deleteItem, deleteCard}) {
                 data.length > 0 && data.map((value, index) =>
                     <li className="li-style" id={id} onMouseEnter={() => setShown(true)} onMouseLeave={() => setShown(false)} key={index}>{value}
                     {show && 
-                    <object className='delete-item-button' onClick={deleteItem} id={id} index={index} data="/src/assets/delete.svg" type="image/png" width="15" height="15"></object>
+                    <object className='delete-item-button' onClick={deleteItem} id={id} index={index}  data="/images/delete.svg" type="image/png" width="15" height="15"></object>
                     }
                     </li>
                  )
@@ -213,3 +214,23 @@ export default Form;
     </>
   )
 }*/
+
+  /*const [show, setShown] = useState(false);
+  const [path, setPath] = useState('');
+
+  useEffect(() => {
+    const myData = async () =>  {
+      const svg = await resolveResource('resources/assets/delete.svg');
+      const src = convertFileSrc(svg);
+      setPath(src);
+    }
+
+    myData()
+    .then((response) => response)
+    .catch((error) => error)
+
+import { resolveResource } from '@tauri-apps/api/path';
+import { convertFileSrc } from '@tauri-apps/api/tauri';
+  }, []);*/
+
+  

@@ -24,7 +24,7 @@ ul, li {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-  >.cards{
+   >.cards{
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
@@ -42,34 +42,34 @@ ul, li {
         margin: 0;
         border-bottom: 3px solid black;
       }
-        >.item-section{
+      >.item-section{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        >.ul-style{
           display: flex;
           flex-direction: column;
-          flex-grow: 1;
-          >.ul-style{
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 0.5rem;
-            gap: 0.5rem;
-              >.li-style{
-                display: flex;
-                justify-content: space-between;
-                list-style: inside;
-                padding: 0rem 0rem 0rem 0.5rem;
-                box-shadow: 2px 1px 0px #000;
-                border: 3px solid black;
-                border-radius: 5px;
-                background-color: white;
-              }
-              >.delete-button-style{
-                border-radius: 5px;
-                width: 15px;
-                height: 15px;
-                align-self: center;
-              }
-            }
+          padding-bottom: 0.5rem;
+          gap: 0.5rem;
+            >.li-style{
+              display: flex;
+              justify-content: space-between;
+              list-style: inside;
+              padding: 0rem 0rem 0rem 0.5rem;
+              box-shadow: 2px 1px 0px #000;
+              border: 3px solid black;
+              border-radius: 5px;
+              background-color: white;
+                >.delete-item-button{
+                  border-radius: 5px;
+                  width: 15px;
+                  height: 15px;
+                  align-self: center;
+          }
         }
+      }
     }
+  }
 }
 
 /* Footer */
@@ -108,9 +108,7 @@ ul, li {
       background-color: red;
       width: 50%;
      }
-    
     >.add-button-style{
-
       width: 50%;
       border: 3px solid black;
       border-radius: 5px;
