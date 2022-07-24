@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "test",
+    "productName": "app",
     "version": "0.1.0"
   },
   "tauri": {
@@ -62,12 +62,12 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": [],
+      "resources": [/assets/*],
       "shortDescription": "",
       "targets": "all",
       "windows": {
         "webviewInstallMode": {
-          "silent": true,
+          "silent": false,
           "type": "embedBootstrapper"
         },
         "certificateThumbprint": null,
@@ -86,7 +86,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "React &amp; Tauri",
+        "title": "Grocery List",
         "width": 800
       }
     ]
