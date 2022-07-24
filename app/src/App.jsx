@@ -122,10 +122,10 @@ function Form(){
   {
     setIndex(0)
     setListArray([])
-    const str = response;
-    if(str.length > 0 && listArray.length === 0){
+    
+    const parsed = JSON.parse(response);
+    if(parsed.length > 0 && listArray.length === 0){
       let max = 0;
-      const parsed = JSON.parse(response);
       parsed.map((a) => (setListArray(listArray => [...listArray, a]), max = a.id)
       );
       setIndex(index => index + max + 1);
@@ -173,5 +173,6 @@ function Form(){
 }
 
 export default Form;
+
 
   
