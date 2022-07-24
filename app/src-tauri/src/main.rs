@@ -2,15 +2,13 @@
   all(not(debug_assertions), target_os = "windows"),
   windows_subsystem = "windows"
 )]
-use tauri::{CustomMenuItem, Menu, MenuItem};
+//use tauri::{CustomMenuItem, Menu, MenuItem};
 use std::fs;
 use std::fs::File;
 use std::io::Write;
-//use std::io::Read;
 use std::fs::OpenOptions;
 use std::path::PathBuf;
 use std::path::Path;
-//use std::io::prelude::*;
 
 pub fn create_dir_and_data_file() -> Option<PathBuf>{
   let mut paths = tauri::api::path::data_dir().unwrap().to_owned();
@@ -42,20 +40,6 @@ fn parse_data_file() -> String{
   return content;
 }
 
-/*#[tauri::command]
-fn read_file() -> String{
-  let mut path = tauri::app::path::data_dir().unwrap();
-
-  path.push("groceryApp");
-  path.push("data.json");
-
-  let file = OpenOptions::new()
-    .read(true)
-    .open(true)
-  
-    return file.as_bytes();
-}*/
-
 #[tauri::command]
 fn write_file(data: String) -> String{
   let string = data.as_bytes();
@@ -76,7 +60,7 @@ fn write_file(data: String) -> String{
 
 }
 
-pub fn my_menu() -> Menu {
+/*pub fn my_menu() -> Menu {
   let quit  = CustomMenuItem::new("quit".to_string(), "Quit");
   let close = CustomMenuItem::new("close".to_string(), "Close");
   let idk   = CustomMenuItem::new("oui".to_string(), "Oui");
@@ -86,7 +70,7 @@ pub fn my_menu() -> Menu {
       .add_item(quit)
       .add_item(close);
       return menu;
-}
+}*/
 
 fn main() {
   let context = tauri::generate_context!();
@@ -96,26 +80,3 @@ fn main() {
     .run(context)
     .expect("error while running tauri application");
 }
-
-
-/* 
-
-
-    .menu(if cfg!(target_os = "macos") {
-        tauri::Menu::os_default(&context.package_info().name)
-      } else {
-      my_menu()
-      })
-      .on_menu_event(|event| {
-        match event.menu_item_id(){
-          "quit" => {
-            std::process::exit(0);
-          }
-          "close" => {
-            event.window().close().unwrap();
-          }
-          _ => {}
-        }
-      })
-
-      */

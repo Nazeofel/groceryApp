@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { invoke } from '@tauri-apps/api'
 import './App.scss'
 
-//import axios from 'axios';
-
 function Card({addItem, data, id, title, deleteItem, deleteCard}) {
-
   const [show, setShown] = useState(false);
 
   return (
@@ -17,7 +14,7 @@ function Card({addItem, data, id, title, deleteItem, deleteCard}) {
                 data.length > 0 && data.map((value, index) =>
                     <li className="li-style" id={id} onMouseEnter={() => setShown(true)} onMouseLeave={() => setShown(false)} key={index}>{value}
                     {show && 
-                    <object className='delete-item-button' onClick={deleteItem} id={id} index={index}  data="/images/delete.svg" type="image/png" width="15" height="15"></object>
+                    <object className='delete-item-button' onClick={deleteItem} id={id} index={index}  data="/images/delete.svg" type="image/png" width="15" height="15" alt="delete-item"></object>
                     }
                     </li>
                  )
@@ -76,7 +73,6 @@ function CardList({listArray}) {
           const arrItemCopy = [...item]
           arrItemCopy[itemIndex] = updatedValue;
           setItems(arrItemCopy);
-          listArray
           invoke('write_file', {data: JSON.stringify(item)}).then((response) => response);
           }
         }
@@ -105,6 +101,7 @@ function CardList({listArray}) {
       }
     }
   }
+  
   return (
       <>
           {item.length > 0 &&
@@ -124,7 +121,7 @@ function Form(){
     invoke('parse_data_file').then((response) => 
   {
     setIndex(0)
-    setListArray("")
+    setListArray([])
     const str = response;
     if(str.length > 0 && listArray.length === 0){
       let max = 0;
@@ -137,7 +134,7 @@ function Form(){
     }
   });
   }, []);
-  
+
   const obj = () => {
     if(title === "" || title.length > 10){
       console.log("TITLE SHOULDNT BE EMPTY OR SUPERIOR TO TEN CHARACTERS");
@@ -151,13 +148,14 @@ function Form(){
       }
       invoke('parse_data_file').then((response) =>
        {
-        if(response.length > 0){
-          const parsedJSON = JSON.parse(response);
+        const parsedJSON = JSON.parse(response);
+        if(parsedJSON.length > 0){
           setListArray([...parsedJSON, objc]);
         } else {
           setListArray(listArray => [...listArray, objc]);
         }
-       });
+       })
+       .catch((err) => console.log(err));
     }
   }
 
@@ -175,62 +173,5 @@ function Form(){
 }
 
 export default Form;
-
-
-
-
-  /*useEffect(() => {
-    axios('https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=5010a231a0446e063895e94fe9882e0c')
-      .then(response => {
-        setWeather(response.data);
-      })
-      .catch(error => {
-        console.log(error)
-      })
-      .finally(() => {
-        console.log("nice");
-      });
-  }, []);*/
-
-
-/*function FetchWeather({weatherData}){
-
-
-  if(weatherData != null && weatherData != undefined){
-
-    for(const [key, value] of Object.entries(weatherData)){
-      console.log(value);
-    }
-  }
-
-  return(
-    <>
-      <div>
-        { weatherData != null || weatherData != undefined &&
-          
-          weatherData.map((weather, index) => <li key={index}>{weather.coord}</li>)
-        }
-      </div>
-    </>
-  )
-}*/
-
-  /*const [show, setShown] = useState(false);
-  const [path, setPath] = useState('');
-
-  useEffect(() => {
-    const myData = async () =>  {
-      const svg = await resolveResource('resources/assets/delete.svg');
-      const src = convertFileSrc(svg);
-      setPath(src);
-    }
-
-    myData()
-    .then((response) => response)
-    .catch((error) => error)
-
-import { resolveResource } from '@tauri-apps/api/path';
-import { convertFileSrc } from '@tauri-apps/api/tauri';
-  }, []);*/
 
   

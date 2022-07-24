@@ -16,7 +16,8 @@
         "hide": true,
         "close": true,
         "startDragging": true,
-        "setResizable": true
+        "setResizable": true,
+        "minimize": true
       },
       "fs":{
         "all": true,
