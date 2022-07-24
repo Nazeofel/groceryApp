@@ -7,6 +7,8 @@ html, body, #root{
 #root{
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 0;
 }
 
 /* Reset */
@@ -24,7 +26,7 @@ ul, li {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-   >.cards{
+   & >.cards{
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
@@ -35,23 +37,23 @@ ul, li {
     height: max-content;
     width: 150px;
     background-color: lightblue;
-      >.card-title{
+      & >.card-title{
         display: flex;
         flex-grow: 1;
         font-size: 24px;
         margin: 0;
         border-bottom: 3px solid black;
       }
-      >.item-section{
+      & >.item-section{
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        >.ul-style{
+        & >.ul-style{
           display: flex;
           flex-direction: column;
           padding-bottom: 0.5rem;
           gap: 0.5rem;
-            >.li-style{
+            & >.li-style{
               display: flex;
               justify-content: space-between;
               list-style: inside;
@@ -104,9 +106,12 @@ ul, li {
     >.delete-button-style{
       border-style: none;
       color: white;
-      border-radius: 5px;
-      background-color: red;
       width: 50%;
+      border: 3px solid black;
+      background: #e05a5a;
+      font-weight: bold;
+      border-radius: 5px;
+      box-shadow: -2px 2px 0 #000;
      }
     >.add-button-style{
       width: 50%;

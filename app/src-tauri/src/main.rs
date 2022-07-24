@@ -92,6 +92,15 @@ fn main() {
   let context = tauri::generate_context!();
   create_dir_and_data_file();
   tauri::Builder::default()
+    .invoke_handler(tauri::generate_handler![write_file, parse_data_file])
+    .run(context)
+    .expect("error while running tauri application");
+}
+
+
+/* 
+
+
     .menu(if cfg!(target_os = "macos") {
         tauri::Menu::os_default(&context.package_info().name)
       } else {
@@ -108,7 +117,5 @@ fn main() {
           _ => {}
         }
       })
-    .invoke_handler(tauri::generate_handler![write_file, parse_data_file])
-    .run(context)
-    .expect("error while running tauri application");
-}
+
+      */
