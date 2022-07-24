@@ -29,7 +29,7 @@ function Card({addItem, data, id, title, deleteItem, deleteCard}) {
   )
 }
 
-function CardList({listArray}) {
+function CardList({listArray, setListArray}) {
   const [item, setItems] = useState([]);  
   useEffect(() => {
     setItems(listArray);
@@ -47,7 +47,10 @@ function CardList({listArray}) {
         setItems(arrItemCopy);
 
 
-        invoke('write_file', {data: JSON.stringify(item)}).then((response) => response);
+        invoke('write_file', {data: JSON.stringify(item)}).then((response) => {
+          const parsedJSON = JSON.parse(response);           
+          setListArray(parsedJSON);
+        });
       }
     }
   }
@@ -73,7 +76,10 @@ function CardList({listArray}) {
           const arrItemCopy = [...item]
           arrItemCopy[itemIndex] = updatedValue;
           setItems(arrItemCopy);
-          invoke('write_file', {data: JSON.stringify(item)}).then((response) => response);
+          invoke('write_file', {data: JSON.stringify(item)}).then((response) => {
+               const parsedJSON = JSON.parse(response);
+               setListArray(parsedJSON); 
+            });
           }
         }
       }
@@ -97,7 +103,10 @@ function CardList({listArray}) {
         arrItemCopy[itemIndex] = updatedValue;
         setItems(arrItemCopy);
 
-        invoke('write_file', {data: JSON.stringify(item)}).then((response) => response);
+        invoke('write_file', {data: JSON.stringify(item)}).then((response) => {
+            const parsedJSON = JSON.parse(response);
+            setListArray(parsedJSON); 
+        });
       }
     }
   }
@@ -122,9 +131,9 @@ function Form(){
   {
     setIndex(0)
     setListArray([])
-    
+    console.log(listArray);
     const parsed = JSON.parse(response);
-    if(parsed.length > 0 && listArray.length === 0){
+    if(parsed.length > 0){
       let max = 0;
       parsed.map((a) => (setListArray(listArray => [...listArray, a]), max = a.id)
       );
@@ -146,16 +155,7 @@ function Form(){
         items: [],
         id: index
       }
-      invoke('parse_data_file').then((response) =>
-       {
-        const parsedJSON = JSON.parse(response);
-        if(parsedJSON.length > 0){
-          setListArray([...parsedJSON, objc]);
-        } else {
-          setListArray(listArray => [...listArray, objc]);
-        }
-       })
-       .catch((err) => console.log(err));
+      setListArray(listArray => [...listArray, objc]);
     }
   }
 
@@ -167,7 +167,7 @@ function Form(){
       <button type="submit">Submit</button>
     </form>
     <main className="main-container">
-      <CardList listArray={listArray}/>
+      <CardList listArray={listArray} setListArray={setListArray}/>
     </main>
 </>);
 }
