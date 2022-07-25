@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { invoke } from '@tauri-apps/api'
 import './App.scss'
 
-function Card({addItem, data, id, title, deleteItem, deleteCard}) {
+function Card({addItem, data, id, title, deleteItem, deleteCard, editItem}) {
   const [show, setShown] = useState(false);
 
   return (
@@ -12,11 +12,17 @@ function Card({addItem, data, id, title, deleteItem, deleteCard}) {
             <ul className='ul-style'>
               {
                 data.length > 0 && data.map((value, index) =>
-                    <li className="li-style" id={id} onMouseEnter={() => setShown(true)} onMouseLeave={() => setShown(false)} key={index}>{value}
-                    {show && 
+                   <div className="li-container" key={index} onMouseEnter={() => setShown(true)} onMouseLeave={() => setShown(false)} >
+                    <li className="li-style" id={id} key={index}>{value}</li>
+                    <div className="icon-container">
+                    {show && (
+                    <>
+                    <object className='delete-item-button' onClick={editItem} id={id} index={index}  data="/images/pen-solid.svg" type="image/png" width="15" height="15" alt="delete-item"></object>
                     <object className='delete-item-button' onClick={deleteItem} id={id} index={index}  data="/images/delete.svg" type="image/png" width="15" height="15" alt="delete-item"></object>
-                    }
-                    </li>
+                    </>
+                    )}
+                     </div>
+                   </div>
                  )
                 }
             </ul>
@@ -34,7 +40,24 @@ function CardList({listArray, setListArray}) {
   useEffect(() => {
     setItems(listArray);
   }, [listArray]);
-  
+
+  const writeToFile = () => {
+    invoke('write_file', {data: JSON.stringify(item)}).then((response) => {
+      const parsedJSON = JSON.parse(response);           
+      setListArray(parsedJSON);
+    });
+   }
+
+
+  const editItem = (e) => {
+    const target = e.target;
+    for(let value of Object.values(item)){
+        const itemIndex = item.indexOf(value);
+        target.contentEditable = true;
+    }
+  }
+
+
   const deleteCard = (e) => {
     const target = e.target;
     for(let value of Object.values(item)){
@@ -47,42 +70,33 @@ function CardList({listArray, setListArray}) {
         setItems(arrItemCopy);
 
 
-        invoke('write_file', {data: JSON.stringify(item)}).then((response) => {
-          const parsedJSON = JSON.parse(response);           
-          setListArray(parsedJSON);
-        });
+        writeToFile();
       }
     }
   }
 
   const addItem = (e) => {
     const target = e.target;
-    const listItem = prompt("Enter a name");
+    const listItem = " ";
 
-      if(listItem === null || listItem === "" || listItem.length > 10){
-        return;
-      } else {
-        for (let value of Object.values(item)) {
-          if (target.id === value.id.toString()) {
+    for (let value of Object.values(item)) {
+      if (target.id === value.id.toString()) {
 
-          const itemIndex = item.indexOf(value);
+      const itemIndex = item.indexOf(value);
 
-          let updatedValue = {
-            title: value.title,
-            items: value.items = [...value.items, listItem],
-            id: value.id
-          }
-
-          const arrItemCopy = [...item]
-          arrItemCopy[itemIndex] = updatedValue;
-          setItems(arrItemCopy);
-          invoke('write_file', {data: JSON.stringify(item)}).then((response) => {
-               const parsedJSON = JSON.parse(response);
-               setListArray(parsedJSON); 
-            });
-          }
-        }
+      let updatedValue = {
+        title: value.title,
+        items: value.items = [...value.items, listItem],
+        id: value.id
       }
+
+      const arrItemCopy = [...item]
+      arrItemCopy[itemIndex] = updatedValue;
+      setItems(arrItemCopy);
+
+      writeToFile();
+      }
+    }
   }
 
   const deleteItem = (e) => {
@@ -103,10 +117,7 @@ function CardList({listArray, setListArray}) {
         arrItemCopy[itemIndex] = updatedValue;
         setItems(arrItemCopy);
 
-        invoke('write_file', {data: JSON.stringify(item)}).then((response) => {
-            const parsedJSON = JSON.parse(response);
-            setListArray(parsedJSON); 
-        });
+        writeToFile();
       }
     }
   }
@@ -115,7 +126,7 @@ function CardList({listArray, setListArray}) {
       <>
           {item.length > 0 &&
               item.map((value, index) =>
-                  <Card title={value.title} data={value.items} addItem={addItem} deleteItem={deleteItem} deleteCard={deleteCard} key={index} id={value.id}/>
+                  <Card title={value.title} data={value.items} addItem={addItem} deleteItem={deleteItem} deleteCard={deleteCard} editItem={editItem} key={index} id={value.id}/>
               )
           }
       </>)
@@ -131,7 +142,7 @@ function Form(){
   {
     setIndex(0)
     setListArray([])
-    console.log(listArray);
+
     const parsed = JSON.parse(response);
     if(parsed.length > 0){
       let max = 0;

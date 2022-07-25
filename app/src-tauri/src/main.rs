@@ -64,14 +64,14 @@ fn main() {
   let context = tauri::generate_context!();
   create_dir_and_data_file();
   tauri::Builder::default()
-     .setup(|app| {
+     /*.setup(|app| {
         app.windows().iter().for_each(|(label, window)| {
           if let Err(error) = window.menu_handle().hide() {
             println!("Failed to hide menu for {label}, {error}");
           }
         });
         Ok(())
-      })
+      })*/
     .invoke_handler(tauri::generate_handler![write_file, parse_data_file])
     .run(context)
     .expect("error while running tauri application");
