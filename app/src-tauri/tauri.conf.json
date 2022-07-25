@@ -17,7 +17,8 @@
         "close": true,
         "startDragging": true,
         "setResizable": true,
-        "minimize": true
+        "minimize": true,
+        "setDecorations": false
       },
       "fs":{
         "all": true,
