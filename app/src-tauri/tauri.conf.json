@@ -95,7 +95,8 @@
         "height": 600,
         "resizable": false,
         "title": "Grocery List",
-        "width": 800
+        "width": 800,
+        "decorations": false
       }
     ]
   }
