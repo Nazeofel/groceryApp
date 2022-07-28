@@ -6,7 +6,7 @@ const Card = ({addItem, title, deleteCard, data, deleteItem, editItem, id, showO
   return(
     <>
       <div className='cards'>
-        <h1 className='card-title'>{title}</h1>    
+        <h2 className='card-title'>{title}</h2>    
         <div className="item-section">
             <ul className='ul-style'>
               {
@@ -21,7 +21,8 @@ const Card = ({addItem, title, deleteCard, data, deleteItem, editItem, id, showO
                     <>
                       {value.isEditable ? 
                         <>
-                        <object className='delete-item-button' onClick={(e) => editItem(e)} id={id} index={index}  data="/images/pen-solid.svg" type="image/png" width="15" height="15" alt="delete-item"></object>                          </>
+                        <object className='delete-item-button' onClick={(e) => editItem(e)} id={id} index={index}  data="/images/pen-solid.svg" type="image/png" width="15" height="15" alt="delete-item"></object>                          
+                        </>
                         :
                         <> 
                         <object className='delete-item-button' onClick={(e) => validateItem(e)} id={id} index={index}  data="/images/check-solid.svg" type="image/png" width="15" height="15" alt="delete-item"></object>
@@ -37,8 +38,8 @@ const Card = ({addItem, title, deleteCard, data, deleteItem, editItem, id, showO
             </ul>
         </div>      
           <div className="button-container">
-            <button onClick={(e) => addItem(e)} id={id} className='add-button-style'>add</button>
-            <button onClick={(e) => deleteCard(e)} id={id} className='delete-button-style'>delete</button>
+            <button onClick={(e) => addItem(e)} id={id} className='add-button-style'>ADD</button>
+            <button onClick={(e) => deleteCard(e)} id={id} className='delete-button-style'>DELETE</button>
           </div>
       </div>
     </>
@@ -218,10 +219,11 @@ function Form(){
   return(
     <>
     <div className="form-container">
-    <form onSubmit={(e) => {e.preventDefault(); obj()}} className="form">
-      <input type="text" name="listTitle" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="enter a name"/>
-      <button type="submit">Submit</button>
-    </form>
+      <form onSubmit={(e) => {e.preventDefault(); obj()}} className="form">
+        <label htmlFor="listTitle">Create a new list</label>
+        <input type="text" name="listTitle" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="enter a name"/>
+        <button type="submit" className='form-add-button'>ADD</button>
+      </form>
     </div>
     <main className="main-container">
       <CardList listArray={listArray} setListArray={setListArray}/>

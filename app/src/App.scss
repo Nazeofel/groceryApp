@@ -2,6 +2,7 @@ html, body, #root{
   height: 100%;
   margin: 0;
   background-color: hsl(203 13% 13%);
+  overflow: hidden;
 }
 
 #root{
@@ -26,6 +27,8 @@ ul, li {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow: auto;
+  max-height: 500px;
   gap: 1.5rem;
    & >.cards{
     display: flex;
@@ -36,8 +39,8 @@ ul, li {
     border: 2px solid white;
     padding: 0.5rem;
     height: max-content;
-    width: 150px;
-    background-color: hsl(206 68% 26%);
+    width: 165px;
+    background-color: hsl(0, 0%, 46%);
       & >.card-title{
         display: flex;
         flex-grow: 1;
@@ -59,7 +62,6 @@ ul, li {
               display: flex;
               justify-content: space-between;
               padding: 0rem 0rem 0rem 0.5rem;
-              box-shadow: 2px 1px 0px #000;
               border: 3px solid black;
               border-radius: 5px;
               background-color: white;
@@ -107,18 +109,28 @@ ul, li {
 }
 
 .form-container{
-  padding: 2.5rem 0rem 2.5rem 0;
+  padding: 1rem 0rem 2.5rem 0;
   & >.form{
     display: flex;
+    flex-direction: column;
     gap: 0.2rem;
     justify-content: center;
     color: white;
+    & > label{
+      font-weight: bold;
+      align-self: center;
+      font-size: 24px;
+    }
     & > input{
       align-self: center;
       width: 25%;
     }
     & > button{
-      height: 30px;
+      border: 3px solid black;
+      border-radius: 5px;
+      box-shadow: -2px 2px 0px black;
+      background-color: white;
+      font-weight: bold;
       align-self: center;
       width: 10%;
     }
@@ -143,7 +155,8 @@ ul, li {
       width: 50%;
       border: 3px solid black;
       border-radius: 5px;
-      box-shadow: -1px 2px 0px black;
+      box-shadow: -2px 2px 0px black;
+      font-weight: bold;
       background-color: white;
     }
 }

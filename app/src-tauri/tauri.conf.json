@@ -93,7 +93,7 @@
       {
         "fullscreen": false,
         "height": 600,
-        "resizable": true,
+        "resizable": false,
         "title": "Grocery List",
         "width": 800
       }

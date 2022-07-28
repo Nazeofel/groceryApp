@@ -12,6 +12,7 @@ function WindowMenu(){
     }
 
     return(
+    <>
     <div data-tauri-drag-region className="titlebar">
       <div className="titlebar-button" id="titlebar-minimize">
         <object data="/images/minus-solid.svg" type="image/png" className="minimize-app-svg" onClick={() => minimize()} alt="minimize"></object>
@@ -20,6 +21,7 @@ function WindowMenu(){
         <object data="/images/xmark-solid.svg" type="image/png" className="close-app-svg" onClick={() => close()} alt="close"></object>
       </div>
     </div>
+    </>
     )
   }
 
