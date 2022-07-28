@@ -17,7 +17,8 @@
         "close": true,
         "startDragging": true,
         "setResizable": true,
-        "minimize": true
+        "minimize": true,
+        "setDecorations": false
       },
       "fs":{
         "all": true,
@@ -94,8 +95,7 @@
         "height": 600,
         "resizable": true,
         "title": "Grocery List",
-        "width": 800,
-        "decorations": false
+        "width": 800
       }
     ]
   }

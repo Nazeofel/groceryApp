@@ -60,18 +60,22 @@ fn write_file(data: String) -> String{
 
 }
 
+/*pub fn my_menu() -> Menu {
+  let quit  = CustomMenuItem::new("quit".to_string(), "Quit");
+  let close = CustomMenuItem::new("close".to_string(), "Close");
+  let idk   = CustomMenuItem::new("oui".to_string(), "Oui");
+  let menu = Menu::new()
+      .add_item(idk)
+      .add_native_item(MenuItem::Separator)
+      .add_item(quit)
+      .add_item(close);
+      return menu;
+}*/
+
 fn main() {
   let context = tauri::generate_context!();
   create_dir_and_data_file();
   tauri::Builder::default()
-     /*.setup(|app| {
-        app.windows().iter().for_each(|(label, window)| {
-          if let Err(error) = window.menu_handle().hide() {
-            println!("Failed to hide menu for {label}, {error}");
-          }
-        });
-        Ok(())
-      })*/
     .invoke_handler(tauri::generate_handler![write_file, parse_data_file])
     .run(context)
     .expect("error while running tauri application");

@@ -1,7 +1,7 @@
 html, body, #root{
   height: 100%;
   margin: 0;
-  background-color: wheat;
+  background-color: hsl(203 13% 13%);
 }
 
 #root{
@@ -9,7 +9,7 @@ html, body, #root{
   flex-direction: column;
   position: relative;
   z-index: 0;
-  transform: translateY(30px);
+  transform: translateY(50px);
 }
 
 /* Reset */
@@ -37,13 +37,14 @@ ul, li {
     padding: 0.5rem;
     height: max-content;
     width: 150px;
-    background-color: lightblue;
+    background-color: hsl(206 68% 26%);
       & >.card-title{
         display: flex;
         flex-grow: 1;
         font-size: 24px;
         margin: 0;
-        border-bottom: 3px solid black;
+        border-bottom: 3px solid hsl(203 13% 13%);
+        color: hsl(183 18% 94%);
       }
       & >.item-section{
         display: flex;
@@ -57,14 +58,17 @@ ul, li {
             & >.li-container{
               display: flex;
               justify-content: space-between;
-              list-style: inside;
               padding: 0rem 0rem 0rem 0.5rem;
               box-shadow: 2px 1px 0px #000;
               border: 3px solid black;
               border-radius: 5px;
               background-color: white;
-                & >.li-style{
+                & > .li-style{
                   width: 90%; 
+                   & > .input-style{
+                    width: inherit;
+                    border: none;
+                   }
                 }
                 & >.icon-container{
                     display: flex;
@@ -102,19 +106,29 @@ ul, li {
    }
 }
 
-.form{
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+.form-container{
+  padding: 2.5rem 0rem 2.5rem 0;
+  & >.form{
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    color: white;
+    & > input{
+      align-self: center;
+      width: 25%;
+    }
+    & > button{
+      height: 30px;
+      align-self: center;
+      width: 10%;
+    }
+  }
 }
 
 
 .button-container{
   display: flex;
-  justify-content: center;
-  flex-shrink: 0;
   gap: 0.5rem;
-
     >.delete-button-style{
       border-style: none;
       color: white;

@@ -5,10 +5,11 @@
 }
 
 .titlebar {
-    height: 30px;
-    background-color: gray;
+    height: 40px;
+    background-color: hsl(129 11% 9%);
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     width: -webkit-fill-available;
   }
   .titlebar-button {
@@ -18,6 +19,11 @@
         align-items: center;
         width: 30px;
         height: 30px;
+        filter: invert(97%) sepia(100%) saturate(0%) hue-rotate(246deg) brightness(102%) contrast(101%);
+
+        &:hover{
+        filter: invert(56%) sepia(16%) saturate(2473%) hue-rotate(313deg) brightness(86%) contrast(104%);
+        }
     }
   }
 
