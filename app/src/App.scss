@@ -2,7 +2,6 @@ html, body, #root{
   height: 100%;
   margin: 0;
   background-color: hsl(203 13% 13%);
-  overflow: hidden;
 }
 
 #root{
@@ -27,8 +26,10 @@ ul, li {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  overflow: auto;
-  max-height: 500px;
+  transform: translateY(200px);
+  position: relative;
+  z-index: 0;
+  overflow-y: auto;
   gap: 1.5rem;
    & >.cards{
     display: flex;
@@ -109,7 +110,10 @@ ul, li {
 }
 
 .form-container{
-  padding: 1rem 0rem 2.5rem 0;
+  padding: 2.5rem 0rem 2.5rem 0;
+  position: fixed;
+  width: -webkit-fill-available;
+  z-index: 1;
   & >.form{
     display: flex;
     flex-direction: column;

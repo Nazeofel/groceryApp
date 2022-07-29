@@ -14,7 +14,7 @@ const Card = ({addItem, title, deleteCard, data, deleteItem, editItem, id, showO
                   <li className="li-container" key={index} index={index} id={id} onMouseEnter={(e) => showOptions(e)} onMouseLeave={(e) => hideOptions(e)} >
                     <div className='li-style'>
                       <input  type='text' className="input-style" id={id} key={index} index={index}  
-                        value={value.text} readOnly={value.isEditable} onChangeCapture={(e) => value.text = e.target.value}/>
+                       value={value.text} readOnly={value.isEditable} onChange={(e) => value.text = e.target.value} />
                     </div>
                     <div className="icon-container">
                     {value.isShown && (
